@@ -37,3 +37,11 @@ Priority is uploaded narration, then available **localService** browser TTS, the
 Production builds generate a versioned service worker that precaches the app, lazy Excel parser, fonts and artwork. First online visit must finish preparation before going offline. The status banner distinguishes readiness and offline mode. Development mode does not enable caching. An HTTPS origin (or localhost) is required. Metadata, mappings, translations and history use localStorage. Videos and narration blobs use IndexedDB and are restored to runtime object URLs at startup. Original images/fonts do not require external CDNs.
 
 Storage is specific to the device, browser and site origin; it is not GitHub/cloud storage or a backup. Browser clearing, private mode, quota limits and storage eviction can remove data. An origin not visited before cannot first-load offline. No cross-device synchronization or authenticated production approval service is implemented.
+
+## Player controls and screen masking (20–22)
+
+Source video elements are locked at `muted=true`, `volume=0`, with native controls disabled. Only narration audio exposes audio controls in its dedicated editor. Preview playback and seeking use custom buttons without a source-volume control. Changing languages retains the same source video element and replaces only the active narration track.
+
+Registration opens the segment editor after connecting a video; the work-instruction edit form also has a direct segment-settings button. Range names, confidence/status and source times are editable, and closing the modal discards draft range changes. The Save/Approve action commits them.
+
+Screen masking has its own settings window. Drag on the preview or enter normalized percentage coordinates to add opaque/blur regions; Save commits masks per step. Overlays align to actual contained video pixels, including letterboxing, and work after offline reload. The source file is not modified or re-encoded. For an edited downloadable file, use a video editor to crop/blur the source and upload the result. Unrelated sample/source labels are removed from the player; process badges, subtitles and playback controls remain.
