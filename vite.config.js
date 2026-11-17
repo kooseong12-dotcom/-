@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 
 export default defineConfig({
   base: '/-/',
+  build: { rollupOptions: { input: { main: 'index.html', legacy: 'legacy.html' } } },
   plugins: [{
     name: 'flo-offline-cache',
     generateBundle(_options, bundle) {
